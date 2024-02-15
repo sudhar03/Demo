@@ -1,3 +1,6 @@
 get the data...
 
 procces the data
+
+
+create the avatar
