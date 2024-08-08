@@ -1,0 +1,26 @@
+{
+    "name": "Sample Project",
+    "version": 1.0,
+    "dependencies": {
+        "library_one": ">=1.0.0",
+        "library_two": ">=2.0.0",
+        "library_three": ">=3.0.0
+    },
+    "scripts": {
+        "start": "python main.py",
+        "test": "pytest tests/"
+    }
+    "metadata": {
+        "author": "John Doe",
+        "license": "MIT",
+        "keywords": [
+            "example",
+            "json",
+            "error"
+        ],
+        "repository": {
+            "type": "git",
+            "url": "https://github.com/example/repo.git"
+        }
+    }
+}
