@@ -1,0 +1,41 @@
+name: Check File Extensions
+
+on:
+  pull_request:
+    paths:
+      - '**'
+
+jobs:
+  check-extensions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Validate file extensions
+        run: |
+          # Define allowed extensions
+          ALLOWED_EXTENSIONS=("py" "html" "css" "java" "dart")
+
+          # Function to check if a value is in an array
+          contains() {
+            local value=$1
+            shift
+            for ext in "$@"; do
+              [[ "$ext" == "$value" ]] && return 0
+            done
+            return 1
+          }
+
+          # Get a list of all changed files
+          CHANGED_FILES=$(git diff --name-only origin/main...HEAD)
+
+          for FILE in $CHANGED_FILES; do
+            EXTENSION="${FILE##*.}"
+            if ! contains "$EXTENSION" "${ALLOWED_EXTENSIONS[@]}"; then
+              echo "Error: PR contains file with disallowed extension: $FILE"
+              exit 1
+            fi
+          done
+
+          echo "All files have allowed extensions."
